@@ -56,7 +56,7 @@ def vote(request, question_id):
     except (KeyError, Choice.DoesNotExist):
         return render(request, 'polls/detail.html', {
             'question': question,
-            'error_message': "선택하신 질문이 존재하지 않습니다.",
+            'error_message': "질문을 선택해주세요.",
         })
     else:
         selected_choice.votes += 1
@@ -66,4 +66,6 @@ def vote(request, question_id):
 
 def results(request, question_id):
     response = "질문에 최종 응답한 결과 %s 입니다."
-    return HttpResponse(response % question_id)
+    # return HttpResponse(response % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})

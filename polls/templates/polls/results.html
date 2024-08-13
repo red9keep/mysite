@@ -1,0 +1,15 @@
+<h2>{{ question.question_text }}</h2>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<button type="button" onclick="location.href='{% url 'polls:detail' question.id %}'">다시 고르기</button>
+
+<!-- <form action="{% url 'polls:detail' question.id %}" method="post">
+    <input type="submit" text="다시 고르기">
+</form> -->
+
+<!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
